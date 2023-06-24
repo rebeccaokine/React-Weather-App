@@ -1,0 +1,9 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "React weather application",
+  "main": "index.js",
+  "repository": "https://github.com/rebeccaokine/React-Weather-App.git",
+  "author": "Bex <rebeccaokine.na@gmail.com>",
+  "license": "MIT"
+}
