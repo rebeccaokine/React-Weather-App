@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Weather />
-       <a href="https://github.com/rebeccaokine/React-Weather-App">Open source code by</a>Rebecca Okine
+       <a href="https://github.com/rebeccaokine/React-Weather-App">Open source code by </a>Rebecca Okine
     </div>
   );
 }
