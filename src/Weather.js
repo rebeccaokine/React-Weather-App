@@ -1,21 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Weather.css";
+import axios from "axios";
 
-export default function Weather() {
-  let weatherData = {
-    city: "Accra",
-    dateTime: "Friday 12:00pm",
-    weatherText: "Mostly Sunny",
-    temperature: "30",
-    imgUrl:
-      "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png",
-    humidity: "30",
-    wind: "8"
-  };
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
+  function handleResponse(response) {
+    setWeatherData({
+      ready: true,
+      coordinates: response.data.coordinates,
+      temperature: response.data.temperature,
+      humidity: response.data.temperature.humidity,
+      date: new Date(response.data.time * 1000),
+      description: response.data.condition.description,
+      icon: response.data.condition.icon,
+      wind: response.data.wind.speed,
+      city: response.data.city,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+  
+  function search() {
+  const apiKey="4cb1b0o198a509a8f2a2tffe1e88bf73";
+  let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  axios.get(apiUrl).then(handleResponse);
+  }
+
+  if (weatherData.ready) {
   return (
     <div className="Weather">
-      <form id="search-form">
+      <form id="search-form" onSubmit={handleSubmit}>
         <div className="input-group">
           <input
             type="search"
@@ -26,6 +49,7 @@ export default function Weather() {
             style={{ backgroundColor: "transparent" }}
             autoComplete="off"
             autoCapitalize="on"
+            onChange={handleCityChange}
           />
           <button type="button" class="btn btn-outline-primary">
             search
@@ -59,4 +83,8 @@ export default function Weather() {
       <div className="weather-forecast"></div>
     </div>
   );
+  } else{
+    search();
+    return "Loading";
+  }
 }
