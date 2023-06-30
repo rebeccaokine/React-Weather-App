@@ -60,12 +60,12 @@ export default function Weather(props) {
       <div className="row">
         <div className="col weather-info">
           <div className="upperText">
-            <h5 className="dateTime">{weatherData.dateTime}</h5>
-            <h2 className="weatherText">{weatherData.weatherText}</h2>
+            <h5 className="dateTime">{weatherData.date}</h5>
+            <h2 className="weatherText">{weatherData.description}</h2>
             <h1 className="cityName">{weatherData.city}</h1>
           </div>
           <div className="temperatureUnit">
-            <img src={weatherData.imgUrl} alt={weatherData.weatherText} />
+            <img src={weatherData.icon} alt={weatherData.description} />
             <h1 className="temperature">{weatherData.temperature}</h1>
             <span className="units">
               <a href="#">℃</a> | <a href="#">℉</a>
