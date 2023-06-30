@@ -82,6 +82,6 @@ export default function Weather(props) {
     let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
     axios.get(apiUrl).then(handleResponse);
 
-    return "Loading... </br>";
+    return "Loading...";
   }
 }
