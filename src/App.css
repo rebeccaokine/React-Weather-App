@@ -1,3 +1,7 @@
+body{
+  background-color: rgb(161, 255, 161);
+}
+
 .App {
   max-width: 600px;
   margin: 120px auto;
@@ -10,5 +14,5 @@
 
 .App a{
   text-decoration: none;
-  color:rgb(13, 155, 1);
+  color:rgb(15, 107, 3);
 }
