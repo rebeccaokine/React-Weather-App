@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import "./Weather.css";
+import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
+import "./Weather.css";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
@@ -9,14 +11,14 @@ export default function Weather(props) {
   function handleResponse(response) {
     setWeatherData({
       ready: true,
-      coordinates: response.data.coordinates,
-      temperature: response.data.temperature,
-      humidity: response.data.temperature.humidity,
-      date: new Date(response.data.time * 1000),
-      description: response.data.condition.description,
-      icon: response.data.condition.icon,
+      coordinates: response.data.coord,
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity,
+      date: new Date(response.data.dt * 1000),
+      description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
       wind: response.data.wind.speed,
-      city: response.data.city,
+      city: response.data.name,
     });
   }
 
@@ -28,63 +30,42 @@ export default function Weather(props) {
   function handleCityChange(event) {
     setCity(event.target.value);
   }
-  
+
   function search() {
-  const apiKey="4cb1b0o198a509a8f2a2tffe1e88bf73";
-  let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
-  axios.get(apiUrl).then(handleResponse);
+    const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
   }
 
   if (weatherData.ready) {
-  return (
-    <div className="Weather">
-      <form id="search-form" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <input
-            type="search"
-            className="form-control"
-            placeholder="Enter a city..."
-            aria-label="Search"
-            aria-describedby="search-addon"
-            style={{ backgroundColor: "transparent" }}
-            autoComplete="off"
-            autoCapitalize="on"
-            onChange={handleCityChange}
-          />
-          <button type="button" class="btn btn-outline-primary">
-            search
-          </button>
-        </div>
-      </form>
-
-      <div className="row">
-        <div className="col weather-info">
-          <div className="upperText">
-            <h5 className="dateTime">{weatherData.date}</h5>
-            <h2 className="weatherText">{weatherData.description}</h2>
-            <h1 className="cityName">{weatherData.city}</h1>
+    return (
+      <div className="Weather">
+        <form onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col-9">
+              <input
+                type="search"
+                placeholder="Enter a city.."
+                className="form-control"
+                autoFocus="on"
+                onChange={handleCityChange}
+              />
+            </div>
+            <div className="col-3">
+              <input
+                type="submit"
+                value="Search"
+                className="btn btn-primary w-100"
+              />
+            </div>
           </div>
-          <div className="temperatureUnit">
-            <img src={weatherData.icon} alt={weatherData.description} />
-            <h1 className="temperature">{weatherData.temperature}</h1>
-            <span className="units">
-              <a href="#">℃</a> | <a href="#">℉</a>
-            </span>
-          </div>
-        </div>
-
-        <div className="col temperature-info">
-          <ul>
-            <li>Humidity:{weatherData.humidity}%</li>
-            <li>Wind:{weatherData.wind}km/h</li>
-          </ul>
-        </div>
+        </form>
+        <WeatherInfo data={weatherData} />
+        <WeatherForecast coordinates={weatherData.coordinates} />
       </div>
-      <div className="weather-forecast"></div>
-    </div>
-  );
-  } else{
+    );
+  } else {
     search();
-    return "Loading... ";
+    return "Loading...";
   }
 }
