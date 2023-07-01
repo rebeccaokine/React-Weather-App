@@ -1,90 +1,9 @@
-body {
-  background-color: rgba(5, 174, 252, 0.247);
-  font-family: "Labrada", serif;
-  font-family: "Libre Baskerville", serif;
-}
-
 .App {
-  max-width: 800px;
-  margin: 50px auto;
+  max-width: 600px;
+  margin: 30px auto;
 }
 
-#search-form input[type="search"] {
-  color: white;
-}
-
-form {
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.form-control::placeholder {
-  font-size: 0.95rem;
-  color: #fff;
-  font-style: italic;
-}
-
-.btn {
-  border-color: white;
-  color: #fff;
-}
-
-.row {
-  margin: 10px;
-}
-
-.upperText {
-  margin: 80px 0 0 30px;
-  text-transform: capitalize;
-}
-
-.dateTime {
-  font-size: 14px;
-  font-weight: 800px;
-  margin-bottom: 0;
-}
-
-.weatherText {
-  font-size: 24px;
-  margin-bottom: 0;
-}
-
-.cityName {
-  font-weight: bold;
-  font-size: 36px;
-  margin-bottom: 0;
-}
-
-.temperature {
-  font-size: 120px;
-}
-
-.temperature-info {
-  margin-left: 120px;
-}
-
-.units {
-  position: relative;
-  top: -138px;
-  left: 210px;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-ul {
-  margin-top: 220px;
-  font-weight: bolder;
-  margin-left: 10px;
-}
-
-li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  text-decoration: none;
-  color: rgb(5, 173, 252);
-  font-weight: bold;
+.App footer {
+  font-size: 11px;
+  margin: 10px 0;
 }
