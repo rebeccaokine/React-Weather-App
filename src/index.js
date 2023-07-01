@@ -1,17 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Weather from "./Weather";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-import "./App.css";
-
-function App() {
-  return (
-    <div className="App">
-      <Weather />
-       Coded by <a href="https://rebeccaokine.me" target="_blank" rel="noopener">Rebecca Okine</a> and <a href="https://github.com/rebeccaokine/React-Weather-App" target="_blank" rel="noopener">open sourced on github </a>
-    </div>
-  );
-}
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.css";
+import App from "./App";
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
